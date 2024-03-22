@@ -2,6 +2,26 @@
 
 // ? https://github.com/lydiahallie/javascript-questions
 
+// ! Капитализация строки в JavaScript
+let string = 'follow the reaper'
+const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+// console.log(capitalize(string));
+
+// ! Проверка порядкового номера дня в году
+const dayOfYear = (day = new Date()) => Math.floor((day - new Date(day.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+// console.log(dayOfYear()); // 16 марта 2024 = 76 день года
+
+// ! Вычисление коиличества дней между двумя датами
+const daysDif = (date1, date2) => Math.ceil(Math.abs(date1.getTime() - date2.getTime()) / 86_400_000)
+// console.log(daysDif(new Date('2017-02-03'), new Date('2020-02-03'))); // 1095 дней
+
+// ! Проверка, является ли день будним днем
+const isWeekDay = (date = new Date()) => date.getDay() % 6 !== 0;
+
+// ! Проверка, является ли день выходным днем
+const isWeekend = (date = new Date()) => date.getDay() % 6 === 0;
+
+
 // Дано число. Проверьте, отрицательное оно или нет. Выведите об этом информацию в консоль.
 const isPositive = (num) => {
     if (num > 0) return true;
@@ -11,7 +31,7 @@ const isPositive = (num) => {
 
 
 // Дана строка. Выведите в консоль длину этой строки.
-let string = 'sgferwerdsfg';
+string = 'sgferwerdsfg';
 
 const showStringLength = (str) => {
     console.log(str.length);
@@ -272,7 +292,7 @@ const pushArrTo100 = () => {
 // Дан массив с дробями. Округлите эти дроби до одного знака в дробной части.
 const arrFraction = [1.456, 2.125, 3.32, 4.1, 5.34];
 
-const showArrToOneDigit = (arr) => {   
+const showArrToOneDigit = (arr) => {
     return arr.map(el => +el.toFixed(1));
 };
 // console.log(showArrToOneDigit(arrFraction)); // ok
@@ -380,7 +400,7 @@ const removeEveryThirdSym = (str) => {
             arr.splice(i, 1);
         };
     };
-    return arr.join('');    
+    return arr.join('');
 };
 // console.log(removeEveryThirdSym(string)); // ok
 
@@ -589,11 +609,11 @@ let arr2 = [1, 2, 3, 4, 5, 6];
 const removeLastElements = (arr1, arr2) => {
     if (arr1.length === arr2.length) return `Массивы равны`;
     if (arr1.length > arr2.length) {
-        for (let i = (arr1.length - arr2.length - 1); i >= 0 ; i -= 1) {
+        for (let i = (arr1.length - arr2.length - 1); i >= 0; i -= 1) {
             arr1.pop();
         };
     } else {
-        for (let i = (arr2.length - arr1.length - 1); i >= 0 ; i -= 1) {
+        for (let i = (arr2.length - arr1.length - 1); i >= 0; i -= 1) {
             arr2.pop();
         };
     };
@@ -749,11 +769,11 @@ let str2 = 'snake_case';
 
 // Сформируйте с помощью циклов следующий массив:
 arr = [
-	[1, 2, 3],
-	[1, 2, 3],
-	[1, 2, 3],
-	[1, 2, 3],
-	[1, 2, 3],
+    [1, 2, 3],
+    [1, 2, 3],
+    [1, 2, 3],
+    [1, 2, 3],
+    [1, 2, 3],
 ];
 
 arr2 = [];
@@ -771,17 +791,6 @@ for (let i = 0; i <= 4; i += 1) {
 // Дана строка. Проверьте, что эта строка состоит только из цифр.
 str = '12359649';
 // console.log(isNaN(str)); // ok
-
-
-// ! Капитализация строки в JavaScript
-str = 'follow the reaper'
-const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-// console.log(capitalize(str));
-
-
-// ! Проверка порядкового номера дня в году
-const dayOfYear = (day = new Date()) => Math.floor((day - new Date(day.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
-// console.log(dayOfYear()); // 16 марта 2024 = 76 день года
 
 
 // Нечетный или четный
@@ -804,3 +813,15 @@ const oddOrEven = (arr) => {
 // Удалить первый и последний символ.
 const removeChar = (str) => str.slice(1, str.length - 1);
 // console.log(removeChar('country'));
+
+
+// Напишите функцию, которая принимает два числа. Каждую секунду необходимо выводить числа в интервале от первого до второго принятого числа.
+function showNumbersToMaxValue(counter, maxValue) {
+    let interval = setInterval(() => {
+        console.log(counter++);
+        if (counter > maxValue) {
+            clearInterval(interval);
+        };
+    }, 1000)
+};
+// showNumbersToMaxValue(0, 10) // ok
