@@ -1,15 +1,28 @@
 'use strict';
 
+let arr, string;
+
 // ? https://github.com/lydiahallie/javascript-questions
 
 // ! Капитализация строки в JavaScript
-let string = 'follow the reaper'
+string = 'follow the reaper'
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 // console.log(capitalize(string));
+
+// ! метод reduce
+arr = [0, 1, 4];
+
+let result = arr.reduce((acc, el) => acc + el, 0);
+// console.log(result);
+
 
 // ! Проверка порядкового номера дня в году
 const dayOfYear = (day = new Date()) => Math.floor((day - new Date(day.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
 // console.log(dayOfYear()); // 16 марта 2024 = 76 день года
+
+// ! Вывод времени из объекта даты
+const timeFromDate = (date = new Date()) => date.toTimeString().slice(0, 8);
+// console.log(timeFromDate()); // 16:21:57
 
 // ! Вычисление коиличества дней между двумя датами
 const daysDif = (date1, date2) => Math.ceil(Math.abs(date1.getTime() - date2.getTime()) / 86_400_000)
@@ -406,7 +419,7 @@ const removeEveryThirdSym = (str) => {
 
 
 // Дан некоторый массив, например, вот такой. Поделите сумму элементов, стоящих на четных позициях, на сумму элементов, стоящих на нечетных позициях.
-let arr = [10, 20, 30, 4, 50, 60];
+arr = [10, 20, 30, 4, 50, 60];
 
 const sumEvenElements = (arr) => {
     let sumEven = 0;
@@ -825,3 +838,82 @@ function showNumbersToMaxValue(counter, maxValue) {
     }, 1000)
 };
 // showNumbersToMaxValue(0, 10) // ok
+
+
+// Напишите функцию, которая принимает массив строк и возвращает каждую строку, дополненную нужным номером. ['a', 'b'] => [ '1: a', '2: b']
+arr = ['a', 'b', 'c', 'd', 'f'];
+
+function giveNumberToMembers(arr) {
+    let result = arr.map((el, i) => (i + 1) + ': ' + el);
+    console.log(result);
+    return result;
+};
+// giveNumberToMembers(arr); // ok
+
+
+// Дан массив. Сделайте так, чтобы в нем каждый элемент повторился два раза.
+arr = [111, 235, 120, 130, 12, 213]
+
+function giveDoubleMember(arr) {
+    for (let i = arr.length - 1; i >= 0; i -= 1) {
+        arr.splice(i, 0, arr[i]);
+    };
+    console.log(arr);
+    return arr;   
+};
+// giveDoubleMember(arr); // ok
+
+
+// Дан массив и число. Оставьте в массиве только те числа, которые являются делителями заданного числа.
+const filterDividerNum = (arr, num) => {
+    let result = arr.filter(el => el % num === 0);
+    console.log(result);
+    return result;
+};
+// filterDividerNum(arr, 2); // ok
+
+
+const days = ['Воскресение', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+
+// Сделайте функцию, которая вернет текущий день недели словом.
+const showDayToday = (date = new Date()) => days[date.getDay()];
+// console.log(showDayToday()); // понедельник
+
+
+// Сделайте функцию, которая параметром будет принимать секунды, а возвращать количество суток, соответствующих этим секундам.
+const showDaysInSeconts = (sec) => sec / 3600 / 24;
+// console.log(showDaysInSeconts(1036800)); // 12 суток, ok
+
+
+// Сделайте функцию, которая параметром будет принимать число и строку и обрезать эту строку до длины, заданной первым параметром.
+str = 'Ну, погоди'
+
+const sliceString = (num, str) => str.slice(0, num);
+// console.log(sliceString(5, str)); // ok
+
+
+// Сделайте функцию, которая параметром будет принимать число, а возвращать сумму его делителей.
+function showSumOfDividers(num) {
+    let sum = 0;
+
+    for (let i = 2; i < num; i += 1) { // не берем в рассчет 0, 1 и само число
+        if (num % i === 0) sum += i;
+    };
+    console.log(sum);
+    return sum;
+};
+// showSumOfDividers(14) // ok
+
+
+// Сделайте функцию, которая параметром будет принимать число и возвращать сумму его цифр.
+const sumOfDigits = function(num) {
+    let sum = 0;
+    num = String(num);
+
+    for (let i = 0; i < num.length; i += 1) {
+        sum += (num[i] * 10 / 10);
+    };
+    console.log(sum);
+    return sum;
+};
+// sumOfDigits(666) // ok
