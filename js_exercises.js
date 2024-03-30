@@ -2,6 +2,7 @@
 
 let arr, string;
 
+// установи расширение Better Comments в VS Code
 // ? https://github.com/lydiahallie/javascript-questions
 
 // ! Капитализация строки в JavaScript
@@ -10,11 +11,8 @@ const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 // console.log(capitalize(string));
 
 // ! метод reduce
-arr = [0, 1, 4];
-
-let result = arr.reduce((acc, el) => acc + el, 0);
+// let result = arr.reduce((acc, el) => acc + el, 0);
 // console.log(result);
-
 
 // ! Проверка порядкового номера дня в году
 const dayOfYear = (day = new Date()) => Math.floor((day - new Date(day.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
@@ -54,7 +52,7 @@ const showStringLength = (str) => {
 
 // Дана строка. Выведите в консоль последний символ строки.
 string = 'string';
-// console.log(string[5]); // ok
+// console.log(string[string.length - 1]); // ok
 
 
 // Дано число. Проверьте, четное оно или нет.
@@ -917,3 +915,40 @@ const sumOfDigits = function(num) {
     return sum;
 };
 // sumOfDigits(666) // ok
+
+
+// Сделайте функцию, которая параметром будет год и проверять, високосный он или нет.
+// ! год должен быть кратен 4, но если он также кратен 100, то он должен быть кратен 400, чтобы считаться високосным.
+function isLeapYear(year = new Date().getFullYear()) {
+    return (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0) ? true : false;
+};
+// console.log(isLeapYear(1601)); // ok
+
+
+// Сделайте функцию, которая вернет массив всех високосных годов за промежуток времени.
+function showLeapYears(min, max) {
+    let years = [];
+
+    for (let i = min; i <= max; i += 1) {
+        if (i % 4 === 0 && i % 100 !== 0 || i % 400 === 0) years.push(i);        
+    };
+    console.log(years);
+    return years;
+};
+// showLeapYears(1900, 2024); // ok
+
+
+// Сделайте функцию, которая будет возвращать сколько дней осталось до конца текущего месяца.
+const daysToTheEndOfTheMonth = function() {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth() + 1; // получаем номер текущего месяца (январь = 1, февраль = 2, и так далее)
+    const currentYear = currentDate.getFullYear();
+    const currentDay = currentDate.getDate(); // получаем текущий день месяца    
+
+    const endOfMonthDate = new Date(currentYear, currentMonth, 0); // создаем объект даты, устанавливая месяц и год на текущие значения, но день на 0
+    const daysInCurrentMonth = endOfMonthDate.getDate(); // получаем количество дней в текущем месяце
+
+    console.log(daysInCurrentMonth - currentDay);
+    return daysInCurrentMonth - currentDay; // возвращаем разницу между количеством дней в месяце и текущим днем
+};
+// daysToTheEndOfTheMonth(); // ok
