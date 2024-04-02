@@ -32,6 +32,9 @@ const isWeekDay = (date = new Date()) => date.getDay() % 6 !== 0;
 // ! Проверка, является ли день выходным днем
 const isWeekend = (date = new Date()) => date.getDay() % 6 === 0;
 
+// ! // Получаем количество дней в месяце.
+var daysInMonth = new Date('year', 'month', 0).getDate(); // 'year' и 'month' = number
+
 
 // Дано число. Проверьте, отрицательное оно или нет. Выведите об этом информацию в консоль.
 const isPositive = (num) => {
@@ -761,7 +764,7 @@ const allDigitAreMoreThanZero = (num) => {
 function getDividers(num) {
     let dividers = [];
 
-    for (let i = 0; i < num; i += 1) {
+    for (let i = 2; i < num; i += 1) {
         if (num % i === 0) {
             dividers.push(i);
         };
@@ -952,3 +955,112 @@ const daysToTheEndOfTheMonth = function() {
     return daysInCurrentMonth - currentDay; // возвращаем разницу между количеством дней в месяце и текущим днем
 };
 // daysToTheEndOfTheMonth(); // ok
+
+
+// Сделайте функцию, которая заполнит массив N случайными числами из заданного промежутка.
+function pushArrSomeNumbers(min, max) {
+    let arrayN = [];
+
+    for (let i = min; i <= max; i += 1) {
+        arrayN.push(i);
+    };
+    console.log(arrayN);
+    return arrayN;
+};
+// pushArrSomeNumbers(10, 100); // ok
+
+
+// Дана переменная со строкой. Проверьте, что в эта строка представляет собой число, то есть состоит только из цифр.
+str = '128174761';
+
+function allDigitsAreNumbers(str) {
+    return isNaN(str) ? false : true;
+    // return str.split().every(el => Number(el)) ? true : false; // вариант 2
+};
+// console.log(allDigitsAreNumbers(str)); // ok
+
+
+// Сделайте функцию, которая параметром будет принимать массив с числами и возвращать второе по величине число.
+arr = [12, 10, 2, 34, 54, 1, 106, 26, 99];
+
+function showSecondBiggerNumber(arr) {
+    return arr.sort((a, b) => b - a)[1]; 
+};
+// console.log(showSecondBiggerNumber(arr)); // ok
+
+
+// Сделайте функцию, которая параметрами будет принимать два числа и возвращать массив, заполненный целыми числами от минимального параметра до максимального.
+const arrMinToMaxNumbers = function(min, max) {
+    let array = [];
+
+    for (let i = min; i <= max; i += 1) {
+        array.push(i);
+    };    
+    console.log(array);
+    return array;
+};
+// arrMinToMaxNumbers(10, 100); // ok
+
+
+// Сделайте функцию, которая заполнит массив случайными латинскими буквами.
+function arrayWithRandomLetters(length) {
+    const result = [];
+    const letters = ['a','b','c','d','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+    for (let i = 1; i < length; i += 1) {        
+            result.push(letters[Math.round(Math.random() * letters.length)]); // ? Math.floor() или Math.round()? работает и так, и так 
+    };
+    console.log(result);
+    return result;
+};
+// arrayWithRandomLetters(15) // ok
+
+
+// Сделайте функцию, которая сгенерирует строку заданной длины, заполненную случайными латинскими буквами.
+function stringWithRandomLetters(length) {
+    const result = [];
+    const letters = ['a','b','c','d','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+    for (let i = 1; i < length; i += 1) {        
+            result.push(letters[Math.round(Math.random() * letters.length)]); // ? Math.floor() или Math.round()? работает и так, и так 
+    };
+    console.log(result.join(''));
+    return result.join('');
+};
+// stringWithRandomLetters(15)
+
+
+// ! Сделайте функцию, которая параметром будет принимать дату в формате год-месяц-день, и определять, существует ли такая дата или нет.
+function isValidDate(date) {
+    let parts = date.split('-');
+    const [year, month, day] = parts.map(Number); 
+    var daysInMonth = new Date(year, month, 0).getDate();
+
+    if (parts.length !== 3 || parts.some(el => (!/^\d/).test(el))) return false;     
+    if (month < 1 || month > 12) return false;    
+    if (day < 1 || day > daysInMonth) return false;
+
+    return true;
+};
+// console.log(isValidDate("2023-02-28")); // true, так как 28 февраля 2023 года - корректная дата
+// console.log(isValidDate("2023-13-32")); // false, так как 13 февраля не существует, а 32 дня в месяце - нет
+
+
+// Сделайте функцию, которая параметром будет принимать массив с числами и заменять каждое число на массив его делителей.
+arr = [12, 10, 2, 34, 54, 1, 106, 26, 99];
+
+function removeElToHisDivider(arr) {
+    function getDividers(el) {
+        let dividers = [];
+    
+        for (let i = 2; i < el; i += 1) {
+            if (el % i === 0) {
+                dividers.push(i);
+            };
+        };
+        return dividers;
+    };
+    console.log(arr.map(getDividers));
+    return arr.map(getDividers);
+};
+// removeElToHisDivider(arr); // ok
