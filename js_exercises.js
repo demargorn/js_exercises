@@ -1064,3 +1064,93 @@ function removeElToHisDivider(arr) {
     return arr.map(getDividers);
 };
 // removeElToHisDivider(arr); // ok
+
+
+// Сделайте функцию, которая параметром будет принимать секунды, а возвращать количество дней, часов, минут и секунд, соответствующих этим секундам, в виде объекта:
+const showObjectOfDate = function(sec) {
+    let d = Math.floor(sec / 86400); // +
+    sec -= d  *  86400;
+
+    let h = Math.floor(sec / 3600);
+    sec -= h  *  3600;
+
+    let m = Math.floor(sec /  60);
+    let s = sec -= m  *  60;
+
+    console.log({d:d, h:h, m:m, s:s});
+    return {d:d, h:h, m:m, s:s};
+};
+// showObjectOfDate(86410); // ok
+
+
+// Сделайте функцию, которая параметром будет принимать два массива и возвращать массив их общих элементов.
+arr1 = [0,1,2,3,4,5,6,10];
+arr2 = [3,4,5,6,7,8,9,0,10];
+
+function getArrOfSameEl(arr1, arr2) {
+    let sameArr = [];
+
+    arr1.filter(el => {
+        el === arr2[el];
+        sameArr.push(el);
+    });
+    console.log(sameArr);
+    return sameArr;
+};
+// getArrOfSameEl(arr1, arr2) // ok
+
+
+// Сделайте функцию, которая будет возвращать случайное число. Функция не должна возвращать одно и тоже число два раза подряд.
+const returnRandomNumber = () => Math.round(Math.random() * 1000);
+// console.log(returnRandomNumber()); // ok
+
+
+// Сделайте функцию, которая параметром будет принимать массив и элемент и возвращать следующий за ним элемент.
+arr = [0, 1, 2, 3, 4, 5, 6];
+// func(arr, 1); // 2
+// func(arr, 4); // 5
+// func(arr, 5); // 1
+
+function returnNextEl(arr, item) {
+    let elem;
+
+    for (let i = 0; i < arr.length; i += 1) {
+        if (item === arr[i]) {
+            elem = arr[i + 1];
+        };            
+        if (item === arr[arr.length - 1]) {
+            elem = arr[0];
+        };
+    };
+    console.log(elem);
+    return elem;
+};
+// returnNextEl(arr, 6) // ok
+
+
+// Сделайте функцию, которая параметром будет принимать массив и возвращать случайный элемент этого массива.
+arr = ['a','b','c','d','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+function returnRandomEl(arr) {
+    let randomNum;
+
+    arr.forEach((el, i) => {
+        randomNum = arr[Math.round(Math.random() * i)];
+    });
+    console.log(randomNum);
+    return randomNum;
+};
+// returnRandomEl(arr); // ok
+
+
+// Сделайте функцию, которая параметром будет принимать массив и возвращать массив из N случайных элементов этого массива.
+function returnRandomArr(arr, count) {
+    let randomArr = [];
+
+    arr.forEach((el, i) => {
+        if (i < count) randomArr.push(arr[Math.floor(Math.random() * arr.length)]);
+    });
+    console.log(randomArr);
+    return randomArr;
+};
+// returnRandomArr(arr, 10) // ok
