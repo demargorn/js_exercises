@@ -14,6 +14,11 @@ const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 // let result = arr.reduce((acc, el) => acc + el, 0);
 // console.log(result);
 
+// ! Проверка числа на четный/нечетный
+function isEvenBit(num) {
+    return num & 1 ? false : true;    
+};
+
 // ! Проверка порядкового номера дня в году
 const dayOfYear = (day = new Date()) => Math.floor((day - new Date(day.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
 // console.log(dayOfYear()); // 16 марта 2024 = 76 день года
@@ -34,6 +39,13 @@ const isWeekend = (date = new Date()) => date.getDay() % 6 === 0;
 
 // ! // Получаем количество дней в месяце.
 var daysInMonth = new Date('year', 'month', 0).getDate(); // 'year' и 'month' = number
+
+// ! Случайное логическое значение.
+const randomBoolean = () => Math.random() >= 0.5; // true or false
+
+// ! Случайное перемешивание элементов массива.
+const shuffleArray = (arr) => arr.sort(() => 0.5 - Math.random());
+
 
 
 // Дано число. Проверьте, отрицательное оно или нет. Выведите об этом информацию в консоль.
@@ -640,10 +652,8 @@ const removeLastElements = (arr1, arr2) => {
 // Дана некоторая переменная с числом. Сделайте строку, содержащую столько нулей, сколько указано в переменной.
 let num = 5; // '00000'
 
-const returnZeros = (num) => {
-    return '0'.repeat(num);
-};
-// console.log(returnZeros(7)); // ok
+const returnZeros = (num) => '0'.repeat(num);
+// console.log(returnZeros(17)); // ok
 
 
 // Дан массив. Найдите сумму элементов этого массива.
@@ -665,19 +675,14 @@ const sumFlatArr = (arr, flat = 5) => {
 // Дан массив со словами. Удалите из него слова, состоящие более чем из трех символов.
 arr = ['asd', 'werfg', 'dfskjvf', 'sdf', 'weer', 'qty'];
 
-const removeWordsLessThreeSym = (arr) => {
-    return arr.filter(el => el.length <= 3);
-};
+const removeWordsLessThreeSym = (arr) => arr.filter(el => el.length <= 3);
 // console.log(removeWordsLessThreeSym(arr)); // ok
 
 
 // Дано некоторое слово. Проверьте, что это слово читается одинаково с любой стороны.
 let word = 'abcba';
 
-const isWordPalindrom = (word) => {
-    if (word === word.split('').reverse().join('')) return true;
-    else return false;
-};
+const isWordPalindrom = (word) => word === word.split('').reverse().join('') ? true : false;
 // console.log(isWordPalindrom(word)); // ok
 
 
@@ -818,8 +823,7 @@ const oddOrEven = (arr) => {
         return sum;
     });
 
-    if (sum % 2 === 0) return 'even';
-    else return 'odd';
+    return sum % 2 === 0 ? 'even' : 'odd';    
 };
 // console.log(oddOrEven(arr)); // ok
 
@@ -846,6 +850,7 @@ arr = ['a', 'b', 'c', 'd', 'f'];
 
 function giveNumberToMembers(arr) {
     let result = arr.map((el, i) => (i + 1) + ': ' + el);
+    
     console.log(result);
     return result;
 };
@@ -1154,3 +1159,80 @@ function returnRandomArr(arr, count) {
     return randomArr;
 };
 // returnRandomArr(arr, 10) // ok
+
+
+// Найти количество простых чисел от 0 до n
+function isPrime(value) {
+   for (let i = 2; i < value; i += 1) { // 0, 1 и 2 не берем в рассчет
+       if (value % i === 0) return false; 
+   };
+
+   return true;
+}; // проверить каждое число от 0 до n простое ли оно
+
+function countPrimes(n) {
+   let counter = 0;
+
+   for (let i = 2; i <= n; i += 1) { // 0, 1 и 2 не берем в рассчет
+       if (isPrime(i)) counter += 1;
+   };
+
+   return counter;
+};
+// console.log(countPrimes(12));
+
+
+// Сделайте функцию, которая будет возвращать массив простых чисел из заданного промежутка.
+const returnArrOfSimpleNumbers = function(min, max) {
+    let array = [];
+
+    for (let i = min; i <= max; i += 1) {
+        if (isPrime(i)) array.push(i);
+    };
+
+    function isPrime(value) {
+        for (let i = 2; i < value; i += 1) { 
+            if (value % i === 0) return false; 
+        };
+        return true;
+     };
+     console.log(array);
+     return array;     
+};
+// returnArrOfSimpleNumbers(11, 221); // ok
+
+
+// Сделайте функцию, которая параметрами будет принимать любое количество чисел, а возвщать их сумму.
+function sumArgs(...args) {
+    return args.reduce((acc, value) => acc + value, 0);
+};
+// console.log(sumArgs(10, 11, 12, 13, 15)); // ok
+
+
+// ! замыкания
+let buttonProps = (borderRadius) => {
+    const createVariantButtonProps = (variant, color) => {
+        const newProps = {
+            borderRadius,
+            variant,
+            color
+      };
+
+      return newProps;
+    };
+
+    return createVariantButtonProps;
+};
+let primaryButton = buttonProps("1rem"); 
+const primaryButtonProps = primaryButton("primary", "red"); // ! не понятно как параметры попадают в createVariantButtonProps
+// console.log(primaryButtonProps);
+
+
+// Поиск в массиве элемента с длиной N
+const names = ['Егор', 'Петр', 'Денис', 'Иван', 'Коля'];
+
+let res = names.find(el => {
+    if(el.length === 5) return true;
+});
+// console.log(res); // Денис
+
