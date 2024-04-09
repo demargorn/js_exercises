@@ -5,6 +5,12 @@ let arr, string;
 // установи расширение Better Comments в VS Code
 // ? https://github.com/lydiahallie/javascript-questions
 
+// ! бенчмарк
+const start = performance.now();
+// Код, который нужно измерить
+const end = performance.now();
+// console.log(`Время выполнения: ${end - start} миллисекунд`);
+
 // ! Капитализация строки в JavaScript
 string = 'follow the reaper'
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
@@ -47,23 +53,16 @@ const randomBoolean = () => Math.random() >= 0.5; // true or false
 const shuffleArray = (arr) => arr.sort(() => 0.5 - Math.random());
 
 
-
 // Дано число. Проверьте, отрицательное оно или нет. Выведите об этом информацию в консоль.
-const isPositive = (num) => {
-    if (num > 0) return true;
-    else return false;
-};
-// console.log(isPositive(15)); // ok
+const isPositive = (num) => (num > 0) ? true : false;
+// console.log(isPositive(10)); // ok
 
 
 // Дана строка. Выведите в консоль длину этой строки.
-string = 'sgferwerdsfg';
+string = 'sgferwerfgdsfg';
 
-const showStringLength = (str) => {
-    console.log(str.length);
-    return str.length;
-};
-// showStringLength(string); // ok
+const showStringLength = (str) => str.length;
+// console.log(showStringLength(string)); // ok
 
 // Дана строка. Выведите в консоль последний символ строки.
 string = 'string';
@@ -79,10 +78,7 @@ const isEven = (num) => {
 
 
 // Дано слово. Получите его последнюю букву. Если слово заканчивается на мягкий знак, то получите предпоследнюю букву.
-const giveLastLetter = (word) => {
-    if (word[word.length - 1] === 'ь') return word[word.length - 2];
-    else return word[word.length - 1];
-};
+const giveLastLetter = (word) => word[word.length - 1] === 'ь' ? word[word.length - 2] : word[word.length - 1];
 // console.log(giveLastLetter('гойда')); // ok
 
 
@@ -123,35 +119,30 @@ const firstDigitsIsSame = (num1, num2) => {
     const string1 = num1.toFixed();
     const string2 = num2.toFixed();
 
-    if (string1[0] === string2[0]) return true;
-    else return false;
+    return string1[0] === string2[0] ? true : false;
 };
-// console.log(firstDigitsIsSame(1453, 67438)); // ok
+// console.log(firstDigitsIsSame(14253, 167438)); // ok
 
 
 // Дана строка. Если в этой строке более одного символа, выведите в консоль предпоследний символ этой строки.
-const givePenultLetterInString = (str) => {
-    if (str.length > 1) return str[str.length - 2];
-    else return null;
-};
-// console.log(givePenaltLetterInString('вj')); // ok
+const givePenultLetterInString = (str) => str.length > 1 ? str[str.length - 2] : null;
+// console.log(givePenultLetterInString('вj')); // ok
 
 
 // Даны два целых числа. Проверьте, что первое число без остатка делится на второе.
-const numOneDivideNumTwo = (num1, num2) => {
-    if (num1 % num2 === 0) return true;
-    else return false;
-};
-// console.log(numOneDivideNumTwo(200, 110)); // ok
+const numOneDivideNumTwo = (num1, num2) => num1 % num2 === 0 ? true : false;
+// console.log(numOneDivideNumTwo(200, 10)); // ok
 
 
 // Выведите в консоль все целые числа от 1 до 100.
 const showPositiveNumbers = () => {
     let counter = 0;
+
     for (let i = 0; i < 100; i += 1) {
         console.log(i);
         counter += 1;
     };
+
     return counter;
 };
 // console.log(showPositiveNumbers()); // ok
@@ -160,6 +151,7 @@ const showPositiveNumbers = () => {
 // Выведите в консоль все целые числа от -100 до 0.
 const showNegativeNumbers = () => {
     let counter = 0;
+
     for (let i = -100; i <= 0; i += 1) {
         console.log(i);
         counter += 1;
@@ -172,12 +164,14 @@ const showNegativeNumbers = () => {
 // Выведите в консоль все четные числа из промежутка от 1 до 100.
 const isEven100 = () => {
     let counter = 0;
+
     for (let i = 0; i < 100; i += 1) {
         if (i % 2 === 0) {
             console.log(i);
         };
         counter += 1;
     };
+
     return counter;
 };
 // console.log(isEven100()); // ok
@@ -190,6 +184,7 @@ const isMultipleThree100 = () => {
             console.log(i);
         };
     };
+
     return true;
 };
 //  console.log(isMultipleThree100()); // ok
@@ -198,9 +193,11 @@ const isMultipleThree100 = () => {
 // Найдите сумму всех целых чисел от 1 до 100.
 const sumTo100 = () => {
     let sum = 0;
+
     for (let i = 0; i < 100; i += 1) {
         sum += i;
     };
+
     return sum;
 };
 // console.log(sumTo100()); // ok
@@ -209,11 +206,13 @@ const sumTo100 = () => {
 // Найдите сумму всех целых четных чисел в промежутке от 1 до 100.
 const sumEvenTo100 = () => {
     let sum = 0;
+
     for (let i = 0; i < 100; i += 1) {
         if (i % 2 === 0) {
             sum += i;
         };
     };
+
     return sum;
 };
 // console.log(sumEvenTo100()); // ok
@@ -227,9 +226,7 @@ const oneDivideTwo = (a, b) => {
 
 
 // Дана некоторая строка. Переберите и выведите в консоль по очереди все символы с конца строки.
-const showStringReverse = (str) => {
-    return str.split('').reverse().join();
-};
+const showStringReverse = (str) => str.split('').reverse().join();
 // console.log(showStringReverse('mercedes')); // ok
 
 
@@ -238,9 +235,11 @@ let arrOfNum = [22, 32, 44, 5, 60, 12, 23, 21, 44, 90];
 
 const showSumSquareArrElements = (arr) => {
     let sum = 0;
+
     arr.forEach(el => {
         sum += el ** 2;
     });
+
     return sum;
 };
 // console.log(showSumSquareArrElements(arrOfNum)); // ok
@@ -249,10 +248,12 @@ const showSumSquareArrElements = (arr) => {
 // Дан массив с числами. Найдите сумму квадратных корней элементов этого массива.
 const showSumSqrtArrElements = (arr) => {
     let sum = 0;
+
     arr.forEach(el => {
         sum += Math.sqrt(el);
     });
-    return +sum.toFixed(2);
+
+    return sum.toFixed(2);
 };
 // console.log(showSumSqrtArrElements(arrOfNum)); // ok
 
@@ -267,8 +268,8 @@ const strToArr = (str) => str.split('');
 // Получите массив цифр этого числа.
 let numbers = 123456;
 
-const numToArr = numbers.toFixed().split('');
-// console.log(numToArr); // ok
+const numToArr = (numbers) => numbers.toFixed().split('');
+// console.log(numToArr(numbers)); // ok
 
 
 // Дано некоторое число. Переверните его.
@@ -284,7 +285,6 @@ const sumNumbers = (num) => {
     arr.forEach(el => {
         sum += +el;
     });
-
     console.log(sum);
     return sum;
 };
@@ -298,6 +298,7 @@ const pushNumArr = () => {
     for (let i = 1; i <= 10; i += 1) {
         arr.push(i);
     };
+
     return arr;
 };
 // console.log(pushNumArr()); // ok
@@ -310,6 +311,7 @@ const pushArrTo100 = () => {
     for (let i = 1; i <= 100; i += 1) {
         arr.push(i);
     };
+
     return arr;
 };
 // console.log(pushArrTo100()); // ok
@@ -318,9 +320,7 @@ const pushArrTo100 = () => {
 // Дан массив с дробями. Округлите эти дроби до одного знака в дробной части.
 const arrFraction = [1.456, 2.125, 3.32, 4.1, 5.34];
 
-const showArrToOneDigit = (arr) => {
-    return arr.map(el => +el.toFixed(1));
-};
+const showArrToOneDigit = (arr) => arr.map(el => +el.toFixed(1));
 // console.log(showArrToOneDigit(arrFraction)); // ok
 
 
@@ -351,17 +351,12 @@ const concatArrs = arrOne.concat(arrTwo);
 // Дана некоторая строка. Найдите позицию первого нуля в строке.
 string = '1230450';
 
-function findZero(str) {
-    return str.indexOf(0)
-};
-// console.log(findZero(newString)); // ok
+const findZero = (str) => str.indexOf(0);
+// console.log(findZero(string)); // ok
 
 
 // Даны два слова. Проверьте, что последняя буква первого слова совпадает с первой буквой второго слова.
-const compareFirsrAndLastLetter = (wordOne, wordTwo) => {
-    if (wordOne[wordOne.length - 1] === wordTwo[0]) return true;
-    else return false;
-};
+const compareFirsrAndLastLetter = (wordOne, wordTwo) => wordOne[wordOne.length - 1] === wordTwo[0] ? true : false;
 // console.log(compareFirsrAndLastLetter('секунда', 'абориген')); // ok
 
 
@@ -375,6 +370,7 @@ const numstringFunc = (str) => {
     arr.forEach(el => {
         sum += +el;
     });
+
     return sum;
 };
 // console.log(numstringFunc(numstring)); // ok
@@ -410,6 +406,7 @@ const findZeroPosition = (str) => {
             arrOfZero.push(i);
         };
     });
+
     return arrOfZero;
 };
 // console.log(findZeroPosition(string)); // ok
@@ -444,9 +441,10 @@ const sumEvenElements = (arr) => {
             sumEven += el;
         } else {
             sumOdd += el;
-        }
+        };
     });
-    return +(sumEven / sumOdd).toFixed(2);
+
+    return (sumEven / sumOdd).toFixed(2);
 };
 // console.log((sumEvenElements(arr))); // ok
 
@@ -461,6 +459,7 @@ const getArrOfNumInString = (str) => {
     arr.forEach((el, i) => {
         if (!isNaN(el)) arrIdx.push(i);
     });
+
     return arrIdx;
 };
 // console.log(getArrOfNumInString(string)); // ok
@@ -477,6 +476,7 @@ const sortFunc = (arr) => {
     arr.forEach(el => {
         el.sort((a, b) => a - b);
     });
+    
     return arr;
 };
 // console.log(sortFunc(arr)); // ok
@@ -1236,3 +1236,18 @@ let res = names.find(el => {
 });
 // console.log(res); // Денис
 
+
+// Сделайте функцию, которая параметром будет принимать массив и перемешивать элементы этого массива в случайном порядке.
+function sortArrRandom(arr) {
+    return arr.sort(() => 0.5 - Math.random());
+};
+// console.log(sortArrRandom(names)); // ok
+
+
+// Учитывая набор чисел, верните аддитивную обратную величину каждого из них. [1,-2,3,-4,5] => [-1,2,-3,4,-5]
+arr = [12, -10, 2, 0, -34, -54, 1, -106, 26, -99];
+
+function invertArr(arr) {
+    return arr.map(el => el !== 0 ? -el : el);
+};
+// console.log(invertArr(arr)) // ok;
