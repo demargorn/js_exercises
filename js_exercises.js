@@ -2,45 +2,44 @@
 
 let arr, string;
 
-// установи расширение Better Comments в VS Code
+// * установи расширение Better Comments в VS Code
 // ? https://github.com/lydiahallie/javascript-questions
+// ? https://code.mu/ru/javascript/tasker/stager/5/1/
 
-// ! бенчмарк
+// ! бенчмарк.
 const start = performance.now();
 // Код, который нужно измерить
 const end = performance.now();
 // console.log(`Время выполнения: ${end - start} миллисекунд`);
 
-// ! Капитализация строки в JavaScript
-string = 'follow the reaper'
+// ! Капитализация строки в JavaScript.
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-// console.log(capitalize(string));
 
-// ! метод reduce
+// ! метод reduce.
 // let result = arr.reduce((acc, el) => acc + el, 0);
-// console.log(result);
 
-// ! Проверка числа на четный/нечетный
-function isEvenBit(num) {
-    return num & 1 ? false : true;    
-};
+// ! Генерация случайного числа в заданном диапазоне.
+const randomInRange = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-// ! Проверка порядкового номера дня в году
+// ! Проверка числа на четный(true)/нечетный(false)
+const isEvenBit = (num) => num & 1 ? false : true;
+
+// ! Проверка порядкового номера дня в году.
 const dayOfYear = (day = new Date()) => Math.floor((day - new Date(day.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
 // console.log(dayOfYear()); // 16 марта 2024 = 76 день года
 
-// ! Вывод времени из объекта даты
+// ! Вывод времени из объекта даты.
 const timeFromDate = (date = new Date()) => date.toTimeString().slice(0, 8);
 // console.log(timeFromDate()); // 16:21:57
 
-// ! Вычисление коиличества дней между двумя датами
+// ! Вычисление коиличества дней между двумя датами.
 const daysDif = (date1, date2) => Math.ceil(Math.abs(date1.getTime() - date2.getTime()) / 86_400_000)
 // console.log(daysDif(new Date('2017-02-03'), new Date('2020-02-03'))); // 1095 дней
 
-// ! Проверка, является ли день будним днем
+// ! Проверка, является ли день будним днем.
 const isWeekDay = (date = new Date()) => date.getDay() % 6 !== 0;
 
-// ! Проверка, является ли день выходным днем
+// ! Проверка, является ли день выходным днем.
 const isWeekend = (date = new Date()) => date.getDay() % 6 === 0;
 
 // ! // Получаем количество дней в месяце.
@@ -51,6 +50,10 @@ const randomBoolean = () => Math.random() >= 0.5; // true or false
 
 // ! Случайное перемешивание элементов массива.
 const shuffleArray = (arr) => arr.sort(() => 0.5 - Math.random());
+
+// ! Сколько раз определенный символ встречается в данной строке.
+const countCurrences = (str, char) => str.split(char).length - 1;
+// console.log(countCurrences('banana', 'n'));
 
 
 // Дано число. Проверьте, отрицательное оно или нет. Выведите об этом информацию в консоль.
@@ -476,7 +479,7 @@ const sortFunc = (arr) => {
     arr.forEach(el => {
         el.sort((a, b) => a - b);
     });
-    
+
     return arr;
 };
 // console.log(sortFunc(arr)); // ok
@@ -528,9 +531,11 @@ const descendingOrder = (n) => {
 // Напишите функцию, которая принимает массив из 10 целых чисел (от 0 до 9) и возвращает строку этих чисел в виде номера телефона.
 const createPhoneNumber = (arr) => {
     let format = '(xxx) xxx-xxxx';
+
     arr.forEach(el => {
         format = format.replace('x', el);
     });
+
     return format;
 };
 // console.log(createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])); // ok
@@ -546,7 +551,7 @@ const add = () => {
         } else {
             const result = num + 10;
             cache[num] = result;
-            cache.push(num);
+            cache.push(num);            
             return `Вычисляю: ${result}`;
         };
     };
@@ -662,11 +667,14 @@ arr = [
     [4, 5, 6],
     [7, 8, 9],
 ];
+
 const sumFlatArr = (arr, flat = 5) => {
     let sum = 0;
+
     arr.flat(flat).forEach(el => {
         sum += el;
     });
+    
     return sum;
 };
 // console.log(sumFlatArr(arr)); // ok
@@ -1166,7 +1174,6 @@ function isPrime(value) {
    for (let i = 2; i < value; i += 1) { // 0, 1 и 2 не берем в рассчет
        if (value % i === 0) return false; 
    };
-
    return true;
 }; // проверить каждое число от 0 до n простое ли оно
 
@@ -1176,7 +1183,6 @@ function countPrimes(n) {
    for (let i = 2; i <= n; i += 1) { // 0, 1 и 2 не берем в рассчет
        if (isPrime(i)) counter += 1;
    };
-
    return counter;
 };
 // console.log(countPrimes(12));
@@ -1217,10 +1223,8 @@ let buttonProps = (borderRadius) => {
             variant,
             color
       };
-
       return newProps;
     };
-
     return createVariantButtonProps;
 };
 let primaryButton = buttonProps("1rem"); 
@@ -1247,7 +1251,5 @@ function sortArrRandom(arr) {
 // Учитывая набор чисел, верните аддитивную обратную величину каждого из них. [1,-2,3,-4,5] => [-1,2,-3,4,-5]
 arr = [12, -10, 2, 0, -34, -54, 1, -106, 26, -99];
 
-function invertArr(arr) {
-    return arr.map(el => el !== 0 ? -el : el);
-};
+const invertArr = (arr) => arr.map(el => el !== 0 ? -el : el);
 // console.log(invertArr(arr)) // ok;
