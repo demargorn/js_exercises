@@ -1,10 +1,11 @@
 'use strict';
 
-let arr, string;
-
 // * установи расширение Better Comments в VS Code
 // ? https://github.com/lydiahallie/javascript-questions
 // ? https://code.mu/ru/javascript/tasker/stager/5/1/
+
+let arr, string;
+
 
 // ! бенчмарк.
 const start = performance.now();
@@ -57,7 +58,7 @@ const countCurrences = (str, char) => str.split(char).length - 1;
 
 
 // Дано число. Проверьте, отрицательное оно или нет. Выведите об этом информацию в консоль.
-const isPositive = (num) => (num > 0) ? true : false;
+const isPositive = (num) => num > 0;
 // console.log(isPositive(10)); // ok
 
 
@@ -73,11 +74,8 @@ string = 'string';
 
 
 // Дано число. Проверьте, четное оно или нет.
-const isEven = (num) => {
-    if (num % 2 === 0) return true;
-    else return false;
-};
-// console.log(isEven(11)); // ok
+const isEven = (num) => num % 2 === 0
+// console.log(isEven(12)); // ok
 
 
 // Дано слово. Получите его последнюю букву. Если слово заканчивается на мягкий знак, то получите предпоследнюю букву.
@@ -86,10 +84,7 @@ const giveLastLetter = (word) => word[word.length - 1] === 'ь' ? word[word.leng
 
 
 // Дано число. Выведите в консоль первую цифру этого числа.
-const giveFirstDigit = (num) => {
-    const string = num.toFixed();
-    return +string[0];
-};
+const giveFirstDigit = (num) => +num.toFixed()[0];
 // console.log(giveFirstDigit(356)); // ok
 
 
@@ -110,11 +105,8 @@ const giveSumOfFirstAndLastDigit = (num) => {
 
 
 // Дано число. Выведите количество цифр в этом числе.
-const giveDigitQuantity = (num) => {
-    const string = num.toFixed();
-    return string.length;
-};
-// console.log(giveDigitQuantity(163)); // ok
+const giveDigitQuantity = (num) => num.toFixed().length;
+// console.log(giveDigitQuantity(1633)); // ok
 
 
 // Даны два числа. Проверьте, что первые цифры этих чисел совпадают.
@@ -122,7 +114,7 @@ const firstDigitsIsSame = (num1, num2) => {
     const string1 = num1.toFixed();
     const string2 = num2.toFixed();
 
-    return string1[0] === string2[0] ? true : false;
+    return string1[0] === string2[0];
 };
 // console.log(firstDigitsIsSame(14253, 167438)); // ok
 
@@ -145,7 +137,6 @@ const showPositiveNumbers = () => {
         console.log(i);
         counter += 1;
     };
-
     return counter;
 };
 // console.log(showPositiveNumbers()); // ok
@@ -174,7 +165,6 @@ const isEven100 = () => {
         };
         counter += 1;
     };
-
     return counter;
 };
 // console.log(isEven100()); // ok
@@ -187,7 +177,6 @@ const isMultipleThree100 = () => {
             console.log(i);
         };
     };
-
     return true;
 };
 //  console.log(isMultipleThree100()); // ok
@@ -200,7 +189,6 @@ const sumTo100 = () => {
     for (let i = 0; i < 100; i += 1) {
         sum += i;
     };
-
     return sum;
 };
 // console.log(sumTo100()); // ok
@@ -215,16 +203,13 @@ const sumEvenTo100 = () => {
             sum += i;
         };
     };
-
     return sum;
 };
 // console.log(sumEvenTo100()); // ok
 
 
 // Даны два целых числа. Найдите остаток от деления первого числа на второе.
-const oneDivideTwo = (a, b) => {
-    return a % b;
-};
+const oneDivideTwo = (a, b) => a % b;
 // console.log(oneDivideTwo(6, 5)); // ok
 
 
@@ -242,7 +227,6 @@ const showSumSquareArrElements = (arr) => {
     arr.forEach(el => {
         sum += el ** 2;
     });
-
     return sum;
 };
 // console.log(showSumSquareArrElements(arrOfNum)); // ok
@@ -255,7 +239,6 @@ const showSumSqrtArrElements = (arr) => {
     arr.forEach(el => {
         sum += Math.sqrt(el);
     });
-
     return sum.toFixed(2);
 };
 // console.log(showSumSqrtArrElements(arrOfNum)); // ok
@@ -301,7 +284,6 @@ const pushNumArr = () => {
     for (let i = 1; i <= 10; i += 1) {
         arr.push(i);
     };
-
     return arr;
 };
 // console.log(pushNumArr()); // ok
@@ -314,7 +296,6 @@ const pushArrTo100 = () => {
     for (let i = 1; i <= 100; i += 1) {
         arr.push(i);
     };
-
     return arr;
 };
 // console.log(pushArrTo100()); // ok
@@ -337,7 +318,6 @@ const increaseArr10percent = (arr) => arr.map(el => el += (el *= 0.1));
 // Дается строка чисел, разделенных пробелами, и вы должны вернуть наибольшее и наименьшее число.
 const highAndLowFunc = (args) => {
     let arr = args.split(' ');
-
     return `${Math.max(...arr)} ${Math.min(...arr)}`;
 };
 // console.log(highAndLowFunc("1 2 3 4 5")); // ok
@@ -373,7 +353,6 @@ const numstringFunc = (str) => {
     arr.forEach(el => {
         sum += +el;
     });
-
     return sum;
 };
 // console.log(numstringFunc(numstring)); // ok
@@ -409,7 +388,6 @@ const findZeroPosition = (str) => {
             arrOfZero.push(i);
         };
     });
-
     return arrOfZero;
 };
 // console.log(findZeroPosition(string)); // ok
@@ -446,7 +424,6 @@ const sumEvenElements = (arr) => {
             sumOdd += el;
         };
     });
-
     return (sumEven / sumOdd).toFixed(2);
 };
 // console.log((sumEvenElements(arr))); // ok
@@ -462,7 +439,6 @@ const getArrOfNumInString = (str) => {
     arr.forEach((el, i) => {
         if (!isNaN(el)) arrIdx.push(i);
     });
-
     return arrIdx;
 };
 // console.log(getArrOfNumInString(string)); // ok
@@ -479,7 +455,6 @@ const sortFunc = (arr) => {
     arr.forEach(el => {
         el.sort((a, b) => a - b);
     });
-
     return arr;
 };
 // console.log(sortFunc(arr)); // ok
@@ -516,15 +491,7 @@ const moveZeros = (arr) => {
 
 
 // Cоздать функцию, которая может принимать в качестве аргумента любое неотрицательное целое число и возвращать его с цифрами в порядке убывания.
-const descendingOrder = (n) => {
-    let arr = String(n).split('');
-
-    arr.sort((a, b) => b - a);
-
-    let num = arr.join('');
-
-    return +num;
-};
+const descendingOrder = (n) => String(n).split('').sort((a, b) => b - a).join('');
 // console.log(descendingOrder(123456789)); // ok
 
 
@@ -535,7 +502,6 @@ const createPhoneNumber = (arr) => {
     arr.forEach(el => {
         format = format.replace('x', el);
     });
-
     return format;
 };
 // console.log(createPhoneNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 0])); // ok
@@ -936,7 +902,7 @@ const sumOfDigits = function(num) {
 // Сделайте функцию, которая параметром будет год и проверять, високосный он или нет.
 // ! год должен быть кратен 4, но если он также кратен 100, то он должен быть кратен 400, чтобы считаться високосным.
 function isLeapYear(year = new Date().getFullYear()) {
-    return (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0) ? true : false;
+    return (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0);
 };
 // console.log(isLeapYear(1601)); // ok
 
@@ -1021,7 +987,7 @@ function arrayWithRandomLetters(length) {
     const letters = ['a','b','c','d','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 
     for (let i = 1; i < length; i += 1) {        
-            result.push(letters[Math.round(Math.random() * letters.length)]); // ? Math.floor() или Math.round()? работает и так, и так 
+        result.push(letters[Math.round(Math.random() * letters.length)]); // ? Math.floor() или Math.round()? работает и так, и так 
     };
     console.log(result);
     return result;
