@@ -1220,4 +1220,8 @@ function snakeToCamel(str) {
    return str.replace(/_([a-z])/g, (m, g1) => g1.toUpperCase());
 }
 
-console.log(snakeToTrain('long_long_biggest_name'));
+function validateEmail(email) {
+   return /\w@[\w\d][-_\w\d]+\.\w/.test(email);
+}
+
+// console.log(validateEmail('support@netology.com')); // true
