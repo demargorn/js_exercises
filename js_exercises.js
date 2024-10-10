@@ -1223,5 +1223,4 @@ function snakeToCamel(str) {
 function validateEmail(email) {
    return /\w@[\w\d][-_\w\d]+\.\w/.test(email);
 }
-
 // console.log(validateEmail('support@netology.com')); // true
