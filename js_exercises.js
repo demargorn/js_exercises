@@ -25,7 +25,8 @@ const randomInRange = (min, max) => Math.floor(Math.random() * (max - min + 1)) 
 const isEvenBit = (num) => (num & 1 ? false : true);
 
 // ! Проверка порядкового номера дня в году.
-const dayOfYear = (day = new Date()) => Math.floor((day - new Date(day.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+const dayOfYear = (day = new Date()) =>
+   Math.floor((day - new Date(day.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
 // console.log(dayOfYear()); // 16 марта 2024 = 76 день года
 
 // ! Вывод времени из объекта даты.
@@ -33,7 +34,8 @@ const timeFromDate = (date = new Date()) => date.toTimeString().slice(0, 8);
 // console.log(timeFromDate()); // 16:21:57
 
 // ! Вычисление коиличества дней между двумя датами.
-const daysDif = (date1, date2) => Math.ceil(Math.abs(date1.getTime() - date2.getTime()) / 86_400_000);
+const daysDif = (date1, date2) =>
+   Math.ceil(Math.abs(date1.getTime() - date2.getTime()) / 86_400_000);
 // console.log(daysDif(new Date('2017-02-03'), new Date('2020-02-03'))); // 1095 дней
 
 // ! Проверка, является ли день будним днем.
@@ -74,7 +76,8 @@ const isEven = (num) => num % 2 === 0;
 // console.log(isEven(12)); // ok
 
 // Дано слово. Получите его последнюю букву. Если слово заканчивается на мягкий знак, то получите предпоследнюю букву.
-const giveLastLetter = (word) => (word[word.length - 1] === 'ь' ? word[word.length - 2] : word[word.length - 1]);
+const giveLastLetter = (word) =>
+   word[word.length - 1] === 'ь' ? word[word.length - 2] : word[word.length - 1];
 // console.log(giveLastLetter('гойда')); // ok
 
 // Дано число. Выведите в консоль первую цифру этого числа.
@@ -305,7 +308,8 @@ const findZero = (str) => str.indexOf(0);
 // console.log(findZero(string)); // ok
 
 // Даны два слова. Проверьте, что последняя буква первого слова совпадает с первой буквой второго слова.
-const compareFirsrAndLastLetter = (wordOne, wordTwo) => (wordOne[wordOne.length - 1] === wordTwo[0] ? true : false);
+const compareFirsrAndLastLetter = (wordOne, wordTwo) =>
+   wordOne[wordOne.length - 1] === wordTwo[0] ? true : false;
 // console.log(compareFirsrAndLastLetter('секунда', 'абориген')); // ok
 
 // Даны числа, разделенные запятыми, найдите сумму этих чисел.
@@ -1171,7 +1175,7 @@ function sumArgs(...args) {
 // console.log(sumArgs(10, 11, 12, 13, 15)); // ok
 
 // ! замыкания
-let buttonProps = (borderRadius) => {
+const buttonProps = (borderRadius) => {
    const createVariantButtonProps = (variant, color) => {
       const newProps = {
          borderRadius,
@@ -1184,7 +1188,7 @@ let buttonProps = (borderRadius) => {
 };
 
 let primaryButton = buttonProps('1rem');
-const primaryButtonProps = primaryButton('primary', 'red'); // ! не понятно как параметры попадают в createVariantButtonProps
+const primaryButtonProps = primaryButton('primary', 'red');
 // console.log(primaryButtonProps);
 
 // Поиск в массиве элемента с длиной N
@@ -1224,3 +1228,28 @@ function validateEmail(email) {
    return /\w@[\w\d][-_\w\d]+\.\w/.test(email);
 }
 // console.log(validateEmail('support@netology.com')); // true
+
+// Простая функция мемоизации
+function memoize(fn) {
+   const cache = {};
+   return function (...args) {
+      const key = JSON.stringify(args);
+      if (cache[key]) return cache[key];
+      return (cache[key] = fn(...args));
+   };
+}
+
+// Копирование любого текста в буфер обмена
+const copyToClipboard = (text) => navigator.clipboard.writeText(text);
+// copyToClipboard("This Sring is Copied To Clipboard.")
+
+// Определение темного режима
+const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+// console.log(isDarkMode);// true || false
+
+// Прокрутка к верху страницы
+const goToTop = () => window.scrollTo(0, 0);
+
+// Переключение “показать/скрыть элемент”, используя значение свойства CSS display
+const toggleElementDisplay = (element) =>
+   (element.style.display = element.style.display === 'none' ? 'block' : 'none');
