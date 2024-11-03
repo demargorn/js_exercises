@@ -1253,3 +1253,36 @@ const goToTop = () => window.scrollTo(0, 0);
 // Переключение “показать/скрыть элемент”, используя значение свойства CSS display
 const toggleElementDisplay = (element) =>
    (element.style.display = element.style.display === 'none' ? 'block' : 'none');
+
+// Генераторы
+function* generatorFn() {
+   let i = 0;
+   while (true) {
+      yield i++;
+   }
+}
+
+const gen = generatorFn();
+console.log(gen.next().value);
+console.log(gen.next().value);
+console.log(gen.next().value);
+console.log(gen.next().value);
+
+// Trottle Fn
+function throttle(func, wait) {
+   let shouldThrottle = false;
+   return function (...args) {
+      if (!shouldThrottle) {
+         func.apply(this, args);
+         shouldThrottle = true;
+         setTimeout(() => {
+            shouldThrottle = false;
+         }, wait);
+      }
+   };
+}
+// Arrow-функции нельзя использовать для объявления внутренней функции.
+// Вызов исходной функции через func(...args) также нельзя использовать.
+
+// динамический import
+const { module } = await import('./utils.js');
