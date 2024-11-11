@@ -1286,3 +1286,46 @@ function throttle(func, wait) {
 
 // динамический import
 const { module } = await import('./utils.js');
+
+// браузерная валидация формы
+const form = document.querySelector('form');
+const errors = {
+   login: {
+      valueMissing: 'Представьтесь, пожалуйста', // ошибка пустого значения
+   },
+   email: {
+      valueMissing: 'Нам потребуется электропочта...', // ошибка пустого значения
+      typeMismatch: 'А это точно электропочта?', // ошибка неверного типа значения (email, number, text)
+      // patternMisMatch - ошибка несоответствия паттерну (шаблону)
+   },
+};
+
+form.addEventListener('submit', (e) => {
+   e.preventDefault();
+
+   if (form.checkValidity()) {
+      console.log('valid'); // встроенная валидация браузера (log)
+   } else {
+      console.log('invalid');
+   }
+
+   const elements = form.elements; // собираем элементы формы
+   // выводить будем только первую найденную ошибку
+   const indalid = [...elements].some((item) => {
+      return Object.keys(ValidityState.prototype).some((key) => {
+         if (!item.name) return; // не валидируем кнопки (поля у которых нет name)
+         if (key === 'valid') return; // исключаем значение valid из валидации
+         if (item.validity[key]) {
+            console.log(key); // показываем тип ошибки (log)
+            console.log(errors[item.name][key]); // показываем наш кастомный тип errors (log)
+
+            item.setCustomValidity(errors[item.name][key]); // подставляем наши кастомные ошибки
+            return true;
+         }
+      });
+   });
+
+   if (indalid) {
+      form.reportValidity(); // выводим кастомные ошибки в стандарные места показа ошибок браузера
+   }
+});
