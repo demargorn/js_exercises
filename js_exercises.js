@@ -1284,12 +1284,21 @@ function throttle(func, wait) {
 // Arrow-функции нельзя использовать для объявления внутренней функции.
 // Вызов исходной функции через func(...args) также нельзя использовать.
 
-// динамический import
+// Debounce Fn
+let timeout;
+function debounce(func, delay) {
+   return function () {
+      clearTimeout(timeout);
+      timeout = setTimeout(func, delay);
+   };
+}
+
+// Динамический import
 const { module } = await import('./utils.js');
 
-// браузерная валидация формы
-const form = document.querySelector('form');
-const errors = {
+// Браузерная валидация формы
+var form = document.querySelector('form');
+var errors = {
    login: {
       valueMissing: 'Представьтесь, пожалуйста', // ошибка пустого значения
    },
@@ -1311,7 +1320,7 @@ form.addEventListener('submit', (e) => {
 
    const elements = form.elements; // собираем элементы формы
    // выводить будем только первую найденную ошибку
-   const indalid = [...elements].some((item) => {
+   const getError = [...elements].some((item) => {
       return Object.keys(ValidityState.prototype).some((key) => {
          if (!item.name) return; // не валидируем кнопки (поля у которых нет name)
          if (key === 'valid') return; // исключаем значение valid из валидации
@@ -1320,12 +1329,144 @@ form.addEventListener('submit', (e) => {
             console.log(errors[item.name][key]); // показываем наш кастомный тип errors (log)
 
             item.setCustomValidity(errors[item.name][key]); // подставляем наши кастомные ошибки
-            return true;
+            return errors[item.name][key];
          }
       });
    });
 
    if (indalid) {
       form.reportValidity(); // выводим кастомные ошибки в стандарные места показа ошибок браузера
+   }
+});
+
+// кастомное отображение ошибок через всплывающие подсказки
+class Tooltip {
+   constructor() {
+      this._tooltips = [];
+   }
+
+   showTooltip(message, element) {
+      const tooltipElement = document.createElement('div'); // создаем элемент
+      tooltipElement.classList.add('form-error'); // добавляем класс
+      tooltipElement.textContent = message; // добавляем сообщение к ошибке
+
+      const id = performance.now(); // создаем произвольный id
+
+      this._tooltips.push({
+         id,
+         element: tooltipElement,
+      });
+      document.body.appendChild(tooltipElement); // добавляем элемент в конец body чтобы не использовать z-index
+      return id; // возвращаем id для будущего удаления элемента по клику
+   }
+
+   removeTooltip(id) {
+      const tooltip = this._tooltips.find((t) => t.id === id);
+      tooltip.element.remove();
+      this._tooltips = this._tooltips.filter((t) => t.id !== id);
+   }
+}
+
+const tooltipFactory = new Tooltip();
+const actualMessages = [];
+
+const showTooltip = (message, item) => {
+   actualMessages.push({
+      name: item.name,
+      id: tooltipFactory.showTooltip(message, item),
+   });
+};
+
+const getError = (item) => {
+   const errorKey = Object.keys(ValidityState.prototype).find((key) => {
+      if (!item.name) return; // не валидируем кнопки (поля у которых нет name)
+      if (key === 'valid') return; // исключаем значение valid из валидации
+      return item.validity[key];
+   });
+   if (!errorKey) return;
+
+   return errors[item.name][errorKey];
+};
+
+var form = document.querySelector('form');
+var errors = {
+   login: {
+      valueMissing: 'Представьтесь, пожалуйста', // ошибка пустого значения
+   },
+   email: {
+      valueMissing: 'Нам потребуется электропочта...', // ошибка пустого значения
+      typeMismatch: 'А это точно электропочта?', // ошибка неверного типа значения (email, number, text)
+      // patternMisMatch - ошибка несоответствия паттерну (шаблону)
+   },
+};
+
+form.addEventListener('submit', (e) => {
+   e.preventDefault();
+
+   actualMessages.forEach((message) => tooltipFactory.removeTooltip(message.id));
+
+   if (form.checkValidity()) {
+      console.log('valid'); // встроенная валидация браузера (log)
+   } else {
+      console.log('invalid');
+   }
+
+   const elements = form.elements; // собираем элементы формы
+   // выводить будем только первую найденную ошибку
+   [...elements].some((item) => {
+      const error = getError(item);
+      if (error) {
+         showTooltip(error, item);
+         return true;
+      }
+   });
+});
+
+const elementOnBlur = (e) => {
+   const item = e.target;
+   const error = getError(item);
+   if (error) {
+      showTooltip(error, item);
+   } else {
+      const currentErrorMesage = actualMessages.find((el) => el.name === item.name);
+      if (currentErrorMesage) {
+         tooltipFactory.removeTooltip(currentErrorMesage.id);
+      }
+   }
+
+   el.removeEventListener('blur', elementOnBlur);
+};
+
+form.elements.forEach((item) =>
+   item.addEventListener('focus', () => {
+      item.addEventListener('blur', elementOnBlur);
+   })
+);
+
+// сохраняем данные в local storage
+window.addEventListener('beforeunload', () => {
+   const formData = {};
+   form.elements.forEach((item) => {
+      if (!item.name) return;
+      formData[item.name] = item.value;
+   });
+   localStorage.setItem('formData', JSON.stringify(formData));
+});
+
+// загружаем данные в формы при открытии браузера
+document.addEventListener('DOMContentLoaded', () => {
+   const json = localStorage.getItem('formData');
+   let formData;
+
+   try {
+      formData = JSON.parse(json);
+   } catch (error) {
+      console.log(error);
+   }
+
+   if (formData) {
+      Object.keys(formData).forEach((key) => {
+         form.querySelector(`[name="${key}"]`).value = formData[key];
+      });
    }
 });
